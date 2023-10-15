@@ -51,9 +51,8 @@ function TodoListCard() {
 
     return (
         <React.Fragment>
-            <AddItemForm onNewItem={onNewItem} />
-            {items.length === 0 && (
-		<p className="text-center">You have no todo items yet! Add one above!</p>
+	    {items.length === 0 && (
+                <p className="text-center">There are no items in the database.</p>
             )}
             {items.map(item => (
                 <ItemDisplay
@@ -139,37 +138,8 @@ function ItemDisplay({ item, onItemUpdate, onItemRemoval }) {
     return (
         <Container fluid className={`item ${item.completed && 'completed'}`}>
             <Row>
-                <Col xs={1} className="text-center">
-                    <Button
-                        className="toggles"
-                        size="sm"
-                        variant="link"
-                        onClick={toggleCompletion}
-                        aria-label={
-                            item.completed
-                                ? 'Mark item as incomplete'
-                                : 'Mark item as complete'
-                        }
-                    >
-                        <i
-                            className={`far ${
-                                item.completed ? 'fa-check-square' : 'fa-square'
-                            }`}
-                        />
-                    </Button>
-                </Col>
                 <Col xs={10} className="name">
                     {item.name}
-                </Col>
-                <Col xs={1} className="text-center remove">
-                    <Button
-                        size="sm"
-                        variant="link"
-                        onClick={removeItem}
-                        aria-label="Remove Item"
-                    >
-                        <i className="fa fa-trash text-danger" />
-                    </Button>
                 </Col>
             </Row>
         </Container>
