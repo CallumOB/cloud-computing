@@ -23,3 +23,8 @@ services:
 
 volumes: 
         todo-mysql-data:
+
+networks:
+        default:
+                name: todo-app
+                external: true
