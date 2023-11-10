@@ -4,7 +4,7 @@ PUT https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee920
 
 ```json
 {
-	location: "westeurope"
+	"location": "westeurope"
 }
 ```
 
