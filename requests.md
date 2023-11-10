@@ -1,16 +1,17 @@
 # Resource Group
 
-https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourcegroups/lab4?api-version=2021-04-01
+PUT https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourcegroups/lab4?api-version=2021-04-01
 
 ```json
 {
 	location: "westeurope"
-}```
+}
+```
 
 
 # Virtual Network
 
-https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourceGroups/lab4/providers/Microsoft.Network/virtualNetworks/lab4-net?api-version=2023-05-01
+PUT https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourceGroups/lab4/providers/Microsoft.Network/virtualNetworks/lab4-net?api-version=2023-05-01
 
 ```json
 {
@@ -23,29 +24,32 @@ https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/
     "flowTimeoutInMinutes": 10
   },
   "location": "westeurope"
-}```
+}
+```
 
 
 # Subnet
 
-https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourceGroups/lab4/providers/Microsoft.Network/virtualNetworks/lab4-net/subnets/lab4-subnet?api-version=2023-05-01
+PUT https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourceGroups/lab4/providers/Microsoft.Network/virtualNetworks/lab4-net/subnets/lab4-subnet?api-version=2023-05-01
 
 ```json
 {
   "properties": {
     "addressPrefix": "10.0.0.0/16"
   }
-}```
+}
+```
 
 
 # Public IP Addresses 
 
-https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourceGroups/lab4/providers/Microsoft.Network/publicIPAddresses/lab4-publicIP?api-version=2023-05-01
+PUT https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourceGroups/lab4/providers/Microsoft.Network/publicIPAddresses/lab4-publicIP?api-version=2023-05-01
 
 ```json
 {
   "location": "westeurope"
-}```
+}
+```
 
 
 
@@ -71,12 +75,13 @@ https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/
     ]
   },
   "location": "westeurope"
-}```
+}
+```
 
 
 # Virtual Machine
 
-https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourceGroups/lab4/providers/Microsoft.Compute/virtualMachines/lab4-vm?api-version=2023-07-01
+PUT https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourceGroups/lab4/providers/Microsoft.Compute/virtualMachines/lab4-vm?api-version=2023-07-01
 
 ```json 
 {
@@ -129,4 +134,5 @@ https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/
   },
   "name": "lab4-vm",
   "location": "westeurope"
-}```
+}
+```
