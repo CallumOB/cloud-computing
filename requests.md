@@ -53,9 +53,9 @@ PUT https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee920
 
 
 
-# Network Interfaces
+# Network Interface
 
-https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourceGroups/lab4/providers/Microsoft.Network/networkInterfaces/lab4-nic?api-version=2023-05-01
+PUT https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourceGroups/lab4/providers/Microsoft.Network/networkInterfaces/lab4-nic?api-version=2023-05-01
 
 ```json 
 {
