@@ -1,4 +1,4 @@
-# Resource Group
+# Resource Group
 
 PUT https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourcegroups/lab4?api-version=2021-04-01
 
@@ -9,7 +9,7 @@ PUT https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee920
 ```
 
 
-# Virtual Network
+# Virtual Network
 
 PUT https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourceGroups/lab4/providers/Microsoft.Network/virtualNetworks/lab4-net?api-version=2023-05-01
 
@@ -41,7 +41,7 @@ PUT https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee920
 ```
 
 
-# Public IP Addresses 
+# Public IP Address
 
 PUT https://management.azure.com/subscriptions/301e0856-bba6-41f3-a8b4-6dcdee9206b4/resourceGroups/lab4/providers/Microsoft.Network/publicIPAddresses/lab4-publicIP?api-version=2023-05-01
 
