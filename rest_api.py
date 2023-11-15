@@ -1,9 +1,5 @@
-import requests, sys
+import requests, sys, subprocess, json
 from time import sleep
-
-headers = {"Authorization" : "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IjlHbW55RlBraGMzaE91UjIybXZTdmduTG83WSIsImtpZCI6IjlHbW55RlBraGMzaE91UjIybXZTdmduTG83WSJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuY29yZS53aW5kb3dzLm5ldCIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0Lzc2NjMxN2NiLWU5NDgtNGU1Zi04Y2VjLWRhYmM4ZTJmZDVkYS8iLCJpYXQiOjE2OTk2MzA4MDUsIm5iZiI6MTY5OTYzMDgwNSwiZXhwIjoxNjk5NjM0ODA0LCJhY3IiOiIxIiwiYWlvIjoiQVZRQXEvOFZBQUFBTjJvMlczR24rdVQ0YWcxSkpSbVN4ZjlFbCt6bGRmNnExZnROQUJMc1lLVXQzUGhDRURzd0NOZGsyQllSek90UDBqb3duR2JYaEp2NEs4ekc5U1VSbkNkOUFGWE5lNHhiMnFjWWhDcGJiWHc9IiwiYW1yIjpbInB3ZCIsIm1mYSJdLCJhcHBpZCI6IjE4ZmJjYTE2LTIyMjQtNDVmNi04NWIwLWY3YmYyYjM5YjNmMyIsImFwcGlkYWNyIjoiMCIsImZhbWlseV9uYW1lIjoiTyBCcmllbiIsImdpdmVuX25hbWUiOiJDYWxsdW0iLCJncm91cHMiOlsiODEwOGM1MDMtZDY1Ni00MmNmLThlZTQtODk0NGFlZjBmYWRlIiwiOTdhZjgxMmQtOTZlOS00ZjAxLThhMTEtNzU4MDMzNzYyMTdhIiwiODdmNjAwM2QtOTQ3MC00MzhmLWJmZWYtODEzYjM3ZmMyYjY4IiwiM2U4NDgwOTgtYjRhMS00MTdkLWExYmEtYzljZjNmY2U5ZjUxIiwiODM4YTI4OWEtODRhNC00Y2E4LWFlZWMtYjMxZWMxZDcxZDRhIiwiNGRjMDNiOWYtMWI2Yy00NDE1LWFjMDUtODI0MjcxM2M3NTIwIiwiNWFkN2Q2YjQtYWRhZi00YjlkLTk1N2YtMGYzYjYxNGJlZTYwIiwiOGFjMTU0ZGQtZDQ1Zi00YzQ2LTk0ZTUtYmI3OGZlZmEzYWVmIiwiOGM4MTg2ZWEtNDJhNC00NGFmLThhNzgtYWU5MTQwMTFlNmI0IiwiZDJhNmE4ZWYtNGQyNi00ZDk1LWJkMTEtYWExZWM2MTlmODE4Il0sImlkdHlwIjoidXNlciIsImlwYWRkciI6IjIwMDE6YmI2OjYzMzplMjAwOmI0YmM6MzExMDoxNzZlOjhiYjkiLCJuYW1lIjoiQzIxMzA2NTAzIENhbGx1bSBPIEJyaWVuIiwib2lkIjoiMzY5ZmZiYzktZjQzMi00MDY5LTllOGQtMGNiM2QzOTMyNWQ1Iiwib25wcmVtX3NpZCI6IlMtMS01LTIxLTQwMjI5ODg0OS0xNzM0NzA1MTMxLTMxMjAwMjQwMDEtNDQyNzYiLCJwdWlkIjoiMTAwMzIwMDE3REEzQTBGMiIsInJoIjoiMC5BVEVBeXhkamRranBYMDZNN05xOGppX1Yya1pJZjNrQXV0ZFB1a1Bhd2ZqMk1CTXhBSUkuIiwic2NwIjoidXNlcl9pbXBlcnNvbmF0aW9uIiwic3ViIjoiODZEQTFUUTFEVHMtLTRseU9rLWhwN0ktMU92ZURPOEFSNjBaTFNxcFh2QSIsInRpZCI6Ijc2NjMxN2NiLWU5NDgtNGU1Zi04Y2VjLWRhYmM4ZTJmZDVkYSIsInVuaXF1ZV9uYW1lIjoiQzIxMzA2NTAzQG15dHVkdWJsaW4uaWUiLCJ1cG4iOiJDMjEzMDY1MDNAbXl0dWR1Ymxpbi5pZSIsInV0aSI6Ii1TVm56cmpRRGsyTm9TSGtrNExfQUEiLCJ2ZXIiOiIxLjAiLCJ3aWRzIjpbImI3OWZiZjRkLTNlZjktNDY4OS04MTQzLTc2YjE5NGU4NTUwOSJdLCJ4bXNfY2FlIjoiMSIsInhtc190Y2R0IjoxNTI1MzM4OTQxfQ.q05cdA42JHxuabcnIWNsnLCW7JfvvsYpyJtTdpD3pA9-NxS6LyRumwG7ej2Bkwi7haT4kcWh3F-_Qbi6UdTgWeIYIYB2iVDVqWm27W7MZycRCX5oiJqqUdcLulPZwKB5dGPImcTsbiYBsAwyoE_P6AfAsSX2WCQ3xjt23pcyGoa1RuGIMrIu6pooEXWd1rYx_hZbnPSTZ-CGsZJ0v4Puj77YsklUmz7y8fDoeRYmz0Xfl5K8xBEj-rEA7fxBVwg97sFwVgGNbMVYCzTSaMczwovGC_Bb3hnnfkvKVe4Ixx5IQkC6ROv3hKAuTcydF04gHGVOTmdlBTpVN2sJ1stZpA",
-        "Content-Type" : "application/json"}
-
 
 def createResourceGroup(rg_name, headers): 
     """ Uses REST API to create an Azure resource group. """
@@ -174,7 +170,27 @@ def createVirtualMachine(rg_name, vm_name, nic_name, headers):
         sys.exit()
 
 
+def getAuthToken():
+    command = "az account get-access-token"
+
+    try:
+        result = subprocess.run(command, check=True, text=True, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        # Parse the JSON output
+        json_output = json.loads(result.stdout)
+
+        # Access the accessToken element
+        access_token = json_output.get('accessToken', '')
+        return access_token
+    except:
+        print("Error getting auth token, exiting program.")
+        sys.exit()
+
 # Main Program
+
+
+headers = {"Authorization" : f"Bearer {getAuthToken()}",
+        "Content-Type" : "application/json"}
 rg_name = input("Please enter the name of the Resource Group.\t")
 net_name = input("Please enter the name of the Virtual Network.\t")
 subnet_name = input("Please enter the name of the subnet.\t")
